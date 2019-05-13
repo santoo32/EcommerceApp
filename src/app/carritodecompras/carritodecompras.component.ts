@@ -28,7 +28,7 @@ export class CarritodecomprasComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    //this.parentData.push(new producto('bufanda', 100));
+    //this.parelntData.push(new producto('bufanda', 100));
   }
 
   gettotal(): number{
