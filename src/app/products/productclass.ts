@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 export class Productclass implements OnInit {
 
-  constructor(public nombre:string, public precio: number) {}
+  constructor(public nombre: string, public precio: number, public cantidad: number) {}
 
   ngOnInit() {
   }

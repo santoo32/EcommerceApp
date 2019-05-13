@@ -1,3 +1,31 @@
-<p>
-  carritodecompras works!
-</p>
+<h1>Carrito de compras</h1> 
+<ul class="list-group">
+  <li class="list-group-item" *ngIf = "parentData.length > 0 ; then productsTemplate else noProductsTemplate"></li>
+    <ng-template #productsTemplate> 
+      <li class="list-group-item" *ngFor = "let producto of parentData">
+        Nombre: {{producto.nombre}} <br>
+        Precio:  ${{producto.precio}} <br>
+          Cantidad:
+          
+          <input type="number" [(ngModel)]="producto.cantidad">
+
+
+        <div class="text-right">
+          <button 
+          type="button" class="btn btn-danger btn-sm"
+          (click)= "retirardelcarro(producto)">
+          - 
+          </button>
+        </div>
+      </li>  
+      <button 
+        type="button" class="btn btn-success"
+        (click) = checkout();
+        data-toggle="modal" data-target="#myModal"
+        >
+        Checkout 
+        </button>
+    </ng-template>
+    <ng-template #noProductsTemplate> No hay productos en el carrito </ng-template>
+    <h6>Total de la compra: ${{gettotal()}}</h6> 
+</ul>

@@ -1,3 +1,6 @@
+import { ProducproviderService } from './producprovider.service';
+import { TestservService } from './testserv.service';
+import { UserService } from './user.service';
 import { AuthGuardService as AuthGuardService } from './auth-guard.service';
 import { AuthService } from './auth.service';
 import { CarritodecomprasComponent } from './carritodecompras/carritodecompras.component';
@@ -8,6 +11,7 @@ import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {FormsModule} from '@angular/forms';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -24,6 +28,9 @@ import { AngularFireDatabaseModule} from 'angularfire2/database';
 import { environment } from 'src/environments/environment';
 import { LoginComponent } from './login/login.component';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { SearchCompComponent } from './search-comp/search-comp.component';
+import { ProducteditComponent } from './admin/productedit/productedit.component';
 
 
 @NgModule({
@@ -39,10 +46,14 @@ import { AngularFireAuth } from 'angularfire2/auth';
     MyOrdersComponent,
     AdminProductsComponent,
     LoginComponent,
-    
+    ProductFormComponent,
+    SearchCompComponent,
+    ProducteditComponent,
+
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AppRoutingModule,
@@ -51,17 +62,23 @@ import { AngularFireAuth } from 'angularfire2/auth';
         { path: 'products', component: ProductsComponent },
         { path: 'shopping-cart', component: CarritodecomprasComponent },
         { path: 'my-orders', component: MyOrdersComponent },
-        { path: 'admin/products', component: AdminProductsComponent},
+        { path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuardService]},
+        { path: 'admin/products/new', component: ProductFormComponent, canActivate: [AuthGuardService]},
         { path: 'login', component: LoginComponent},
         { path: 'check-out', component: CheckOutComponent, canActivate: [AuthGuardService]},
-
-
+        { path: 'edit', component: ProducteditComponent, canActivate: [AuthGuardService]},
+        { path: 'search/:nombre', component: SearchCompComponent},
     ]),
     NgbModule.forRoot(),
   ],
-  providers: [AngularFireAuth,
+  providers: [
+    AngularFireAuth,
     AuthService,
-    AuthGuardService],
+    AuthGuardService,
+    UserService,
+    TestservService,
+    ProducproviderService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,3 +1,26 @@
-<p>
-  products works!
-</p>
+<div class="products">
+  <div class="container">
+    <div class="card border-0 shadow my-5">
+      <div class="card-body p-5">
+          <h1>Lista de productos</h1>
+        <ul class="list-group">
+          <li class="list-group-item" *ngIf = "listaproductos.length > 0 ; then productsTemplate else noProductsTemplate"></li>
+          <ng-template #productsTemplate> 
+            <li class="list-group-item" *ngFor = "let Productclass of listaproductos">
+              Nombre: {{Productclass.nombre}} <br>
+              Precio:  ${{Productclass.precio}} 
+              <div class="text-right">
+                <button 
+                type="button" class="btn btn-dark btn-sm"
+                (click)= "anadiralcarro(Productclass)">
+                + 
+                </button>
+              </div>
+            </li>  
+          </ng-template>
+          <ng-template #noProductsTemplate> Sin productos para mostrar</ng-template>
+        </ul>>
+      </div>
+    </div>
+  </div>
+</div>

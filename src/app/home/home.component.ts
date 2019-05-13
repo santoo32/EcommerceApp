@@ -1,3 +1,5 @@
+import { Productclass } from './../products/productclass';
+import { TestservService } from './../testserv.service';
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs';
@@ -9,8 +11,11 @@ import { Observable } from 'rxjs';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() {
-  
+  productos$;
+
+
+  constructor(db: AngularFireDatabase) {
+    this.productos$ = db.list('/productos');
   }
 
   ngOnInit() {

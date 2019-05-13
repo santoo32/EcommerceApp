@@ -1,0 +1,19 @@
+<li class="list-group-item" *ngIf = "productosBusc.length > 0 ; then productsTemplate else noProductsTemplate"></li>
+    <ng-template #productsTemplate> 
+      <h1>Resultados de la busqueda: </h1>
+      <li class="list-group-item" *ngFor = "let producto of productosBusc">
+        Nombre: {{producto.nombre}} <br>
+        Precio:  ${{producto.precio}} <br>
+
+        <div class="text-right">
+            <button 
+            type="button" class="btn btn-dark btn-sm"
+            (click)= "editar(producto)">
+            Editar 
+            </button>
+          </div>
+      </li>  
+    </ng-template>
+    <ng-template #noProductsTemplate> 
+      <h1>Lo sentimos no se ha encontrado el producto</h1>> 
+    </ng-template>
