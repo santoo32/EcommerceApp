@@ -9,8 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CarritodecomprasComponent implements OnInit {
 
-  total = 0;
-  parentData: Productclass [];
+  private _total = 0;
+  public get total() {
+    return this._total;
+  }
+  public set total(value) {
+    this._total = value;
+  }
+  private _parentData: Productclass[];
+  public get parentData(): Productclass[] {
+    return this._parentData;
+  }
+  public set parentData(value: Productclass[]) {
+    this._parentData = value;
+  }
 
 
   retirardelcarro(producto) {
@@ -37,5 +49,7 @@ export class CarritodecomprasComponent implements OnInit {
       return this.total;
 
   }
+
+  
 
 }

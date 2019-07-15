@@ -1,22 +1,37 @@
-<form #myForm="ngForm">
+<form [formGroup]="form">
+  
   <div class="form-group">
     <label for="exampleInputEmail1">Nombre del producto: </label>
-    <input required ngModel name="nombre" #validator="ngModel" type="text" class="form-control" id="nombre" placeholder="Ej: Zapatillas">
-    <div class="alert alert-danger" *ngIf="!validator.valid && validator.touched">Se requiere un nombre</div>
+    <input 
+      formControlName="nombreproducto"
+      type="text" 
+      class="form-control" 
+      id="nombre" 
+      placeholder="Ej: Zapatillas"
+    >
+    <div *ngIf="nombreproducto.touched && nombreproducto.invalid">
+      <div *ngIf="nombreproducto.errors.minlength || nombreproducto.errors.maxlength" class="alert alert-danger">Debe estar entre 3 y 15 caracteres</div>
+      <div *ngIf="nombreproducto.errors.pattern" class="alert alert-danger">Solo letras</div>
+    </div>
     <small id="nombrehelp" class="form-text text-muted">No debe ser nada ofensivo</small>
   </div>
-  <div class="form-group">
-    
+  
+  <div class="form-group">  
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon1">$</span>
-        <input required ngModel name="precio" type="number" #validatorp="ngModel" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+        <input 
+          formControlName="precioproducto"
+          type="number" 
+          class="form-control" 
+          placeholder="" 
+          aria-label="Username" 
+          aria-describedby="basic-addon1"
+        >
       </div>
-      
-      <div class="alert alert-danger" *ngIf="!validatorp.valid && validatorp.touched">Se requiere un precio</div>
-
+      <div *ngIf="precioproducto.touched && precioproducto.invalid"class="alert alert-danger">Se requiere un precio</div>
   </div>
   
   
   
-  <button [disabled]="!myForm.valid" type="submit" class="btn btn-primary" (click)="agregarProducto(validator.value, validatorp.value)">Crear</button>
+  <button type="submit" class="btn btn-primary" (click)="agregarProducto(nombreproducto, precioproducto)">Crear</button>
 </form>
